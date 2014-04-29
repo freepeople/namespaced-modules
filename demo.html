@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test file for Grunt Tasks</title>
+    <link rel="stylesheet" href="assets/combined_styles.min.css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+<h1>Youtube Test</h1>
+    <!--- youtube Video -->
+            <section class="feature_video" >
+                    <div class="featured_video_holder"></div>
+                    <a href="#" class="launch_featured" data-video="rn-f04Kc0Y4" data-source="youtube">
+                       <img src="img/Free-People-Sun-Chaser-Video.jpg" alt="Free People Sun Chaser">
+                    </a>
+            </section>
+<h1>Vimeo Test</h1>
+           	<section class="featured_video" >
+                    <div class="featured_video_holder"></div>
+                    <a href="#" class="launch_featured" data-video="87571528" data-source="vimeo">
+                       <img src="img/Free-People-Sun-Chaser-Video.jpg" alt="Free People Sun Chaser">
+                    </a>
+            </section>
+
+	<script src="assets/combined_js.min.js"></script>
+	<script>
+		$(function () {
+	        $('.launch_featured').on('click', function (e) {
+	            e.preventDefault();
+	            var that = this;
+	            // Example without callback
+	            /*FP.video.embed({
+	                selector: that,
+	                dest: '.featured_video_holder',
+	                videoWith: 560,
+	                videoHeight: 315      
+	            });*/
+	            // Example with callback
+	            FP.video.embed({
+	                selector: that, // required
+	                dest: '.featured_video_holder', // required
+	                videoWith: 560,
+	                videoHeight: 315,
+	                rel: 1,
+	                controls: 1,
+	                loop: 0,
+	                autoplay: 1,
+	                showinfo: 1,
+	                hd: '720',
+	            }, function () {
+	                $(that).css('visibility','hidden');
+	            });
+	        });
+	    });
+	</script/>
+</body>
+</html>
