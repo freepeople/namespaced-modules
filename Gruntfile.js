@@ -4,18 +4,10 @@ module.exports = function (grunt) {
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
-		compass: {
-			dist: {
-				options: {
-					sassDir: 'src/sass',
-					cssDir: 'src/css'
-				}
-			}
-		},
 		sass: {
 			dist: {
 				options: {
-					style: 'expanded'
+					style: 'compact'
 				},
 				files: {
 					'src/css/main.css': 'src/sass/main.scss'
@@ -36,12 +28,6 @@ module.exports = function (grunt) {
 				dest: 'assets/combined_js.min.js'
 			}
 		},
-		cssmin: {
-			css: {
-				src: 'assets/combined_styles.min.css',
-				dest: 'assets/combined_styles.min.css'
-			}
-		},
 		uglify: {
 			js: {
 				files: {
@@ -51,9 +37,9 @@ module.exports = function (grunt) {
 		},
 		watch: {
 			files: ['src/sass/*', 'src/css/*', 'src/js/*'],
-			tasks: ['compass','sass', 'concat', 'cssmin']
+			tasks: ['sass', 'concat']
 		}
 	});
 
-	grunt.registerTask('default', ['concat:css', 'cssmin:css', 'concat:js', 'sass', 'uglify:js', 'watch']);
+	grunt.registerTask('default', ['concat:css', 'concat:js', 'sass', 'uglify:js', 'watch']);
 };
