@@ -1,4 +1,4 @@
-/*global window, FP, jQuery, console*/
+    /*global window, FP, jQuery, console*/
 (function (FP, $) {
     'use strict';
     var video = (function () {
@@ -36,14 +36,14 @@
                 $iframe = $('<iframe frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>');
                 if (source === "vimeo"){
                     $iframe.attr({
-                        'src': '//player.vimeo.com/video/' + vid + '?title=' + opts.showinfo + '&autoplay=' + opts.autoplay + '&loop=' + opts.loop
+                        'src': 'http://player.vimeo.com/video/' + vid + '?title=' + opts.showinfo + '&autoplay=' + opts.autoplay + '&loop=' + opts.loop
                     })
                     .width(opts.videoWith)
                     .height(opts.videoHeight);
                 }
                 else if (source === "youtube") {   
                     $iframe.attr({
-                        'src': '//www.youtube.com/embed/'+ vid +'?rel='+ opts.rel +'&controls='+ opts.controls +'&autohide='+ opts.autohide + '&loop='+ opts.loop + '&autoplay=' + opts.autoplay + '&showinfo=' + opts.showinfo + '&vq=' + opts.hd + '&listType=playlist&list=' + opts.list 
+                        'src': 'http://www.youtube.com/embed/'+ vid +'?rel='+ opts.rel +'&controls='+ opts.controls +'&autohide='+ opts.autohide + '&loop='+ opts.loop + '&autoplay=' + opts.autoplay + '&showinfo=' + opts.showinfo + '&vq=' + opts.hd + '&listType=playlist&list=' + opts.list 
                     })
                     .width(opts.videoWith)
                     .height(opts.videoHeight);
