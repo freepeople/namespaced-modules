@@ -1,5 +1,7 @@
 (function($, window, document, undefined) {
 
+    'use strict';
+
     var moduleName = 'videoEmbed';
     var defaults = {
         youtube: 'http://www.youtube.com/embed/',
