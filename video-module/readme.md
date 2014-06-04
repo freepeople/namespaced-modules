@@ -1,8 +1,4 @@
 # Youtube / Vimeo Video Player Component
-### Contributors
-JS: CLohr and Matt Norton
-HTML/CSS: Matt Norton 
-
 
 ### Usage
 Video Component allows you to embed a Youtube and Vimeo video by applying Video ID _(data-video= )_ and Video Source _(data-source= )_. 
