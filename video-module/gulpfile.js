@@ -1,12 +1,10 @@
-var gulp = require('gulp');
-var mocha = require('gulp-mocha');
+'use strict';
 
-gulp.task('default', function() {
-    return gulp.src(['test/test-*.js'], { read: false })
-        .pipe(mocha({
-            reporter: 'spec',
-            globals: {
-                should: require('should')
-            }
-        }));
+var fs = require('fs');
+var dir = './tasks/';
+var tasks = fs.readdirSync(dir);
+
+// load gulp tasks from directory
+tasks.forEach(function (task) {
+    require(dir + task);
 });
