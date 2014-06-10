@@ -1,7 +1,5 @@
 (function($, window, document, undefined) {
-
     'use strict';
-
     var moduleName = 'videoEmbed';
     var defaults = {
         youtube: 'http://www.youtube.com/embed/',
@@ -18,12 +16,15 @@
         list: '',
         hd: '1080'
     };
-
     var videoName;
     var videoSource;
     var dst;
-
-
+    /**
+     * Video Class
+     * @constructor
+     * @param {object} element - html element to be used as selector
+     * @param {object} options - key/value pairs to override defaults
+     */
     var Video = function(element, options) {
         this.element = element;
         this.options = $.extend({}, defaults, options);
@@ -33,7 +34,11 @@
 
         this.init();
     };
-
+    /**
+     * Initializes the plugin
+     * @method init
+     * @param {object} [config] - Optional configs can be mixed in.
+     */
     Video.prototype.init = function() {
         var self = this;
 
@@ -48,7 +53,13 @@
             self.embedVideo(link);
         });
     };
-
+    /**
+     * Builds the iframe src
+     * @method buildLink
+     * @param {string} type - determines which player to
+     * @param {object} dst - The destination of where to embed the video
+     *
+     */
     Video.prototype.buildLink = function(type) {
         var dynamicLink;
         var types = {
@@ -67,17 +78,23 @@
                     this.options.showinfo + '&autoplay=' +
                     this.options.autoplay + '&loop=' + this.options.loop;
             }
-
         };
         if (typeof types[type] === 'function') {
             dynamicLink = types[type].call(this);
         }
         return dynamicLink;
     };
-
+    /**
+     * Embeds the dynamic link passed in to an iframe onto the page
+     * @method embedVideo
+     * @param {string} link - The dynamic link built
+     *
+     */
     Video.prototype.embedVideo = function(link) {
         // If no link, nothing to embed
-        if (!link) return;
+        if (!link) {
+            throw new Error('Must be either Youtube or Vimeo link');
+        }
 
         var $iframe = $('<iframe frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>');
         $iframe.attr('src', link)
@@ -85,11 +102,14 @@
             .height(this.options.videoHeight);
 
         dst.html($iframe);
-        $(this.element).css('visibility', 'hidden');
+        $(this.element).css('display', 'none');
     };
-
-
-
+    /**
+     * Create jQuery plugin
+     * @method fn[moduleName]
+     * @param {object} options - video embed options to initialize
+     *
+     */
     $.fn[moduleName] = function(options) {
         return this.each(function() {
             if (!$.data(this, "module_" + moduleName)) {
@@ -98,6 +118,4 @@
             }
         });
     };
-
-
 }(jQuery, window, document));

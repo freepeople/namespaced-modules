@@ -8,7 +8,9 @@
     "gulp": "^3.7.0",
     "gulp-mocha": "^0.4.1",
     "gulp-util": "^2.2.16",
-    "should": "^4.0.0"
+    "should": "^4.0.0",
+    "gulp-minify-css": "^0.3.4",
+    "gulp-uglify": "^0.3.0",
+    "gulp-jsdoc": "^0.1.4"
   }
-
 }
