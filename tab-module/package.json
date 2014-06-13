@@ -1,0 +1,25 @@
+{
+  "name": "dropdown-module",
+  "version": "0.0.1",
+  "description": "Dropdown Menu Module",
+  "main": "gulpfile.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "dropdown",
+    "menu",
+    "module"
+  ],
+  "author": "David Annopolsky",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.8.0",
+    "gulp-compass": "^1.1.9",
+    "gulp-rename": "^1.2.0",
+    "gulp-uglify": "^0.3.0"
+  }
+}
