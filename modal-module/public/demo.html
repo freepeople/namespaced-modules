@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Dropdown Module Example</title>
+        <!-- Can be done without Modernizr -->
+        <script  src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.js"></script>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <button data-toggle='modal' data-modal='{"content":"#my-modal"}'>Open Modal</button>
+        <div id="my-modal" class="modal">
+            <div class="modal--content">
+                <a data-modal="close" href="#" class="modal-close">×</a>
+                <h4>Hello</h4>
+                <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo, ipsa,
+                maiores, rerum nihil ut iste eius molestiae fugit blanditiis error
+                optio porro itaque voluptatibus quisquam incidunt autem rem natus
+                cupiditate.
+                </p>
+                <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo, ipsa,
+                maiores, rerum nihil ut iste eius molestiae fugit blanditiis error
+                optio porro itaque voluptatibus quisquam incidunt autem rem natus
+                cupiditate.
+                </p>
+                <img src="http://placeape.com/400/400" alt="">
+            </div>
+        </div>
+        <hr>
+        
+        <button data-toggle='modal' data-modal='{"content":"#modal-yeah"}'>Open Another Modal</button>
+        <div id="modal-yeah" class="modal">
+            <div class="modal--content">
+                <a data-modal="close" href="#" class="modal-close">×</a>
+                <p>
+                Eos, suscipit, modi perspiciatis deserunt pariatur nam
+                repellendus perferendis iusto facere ab maiores est repudiandae sapiente quae impedit.
+                Quidem molestias sed dolor!
+                </p>
+                <p>
+                Consectetur adipisicing elit. Nesciunt, dolorum, animi illum
+                reprehenderit consequuntur nobis porro quibusdam itaque
+                maxime est nam quod similique nisi dolorem repellat molestiae
+                aspernatur recusandae esse.
+                </p>
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="app.min.js"></script>
+    </body>
+</html>
