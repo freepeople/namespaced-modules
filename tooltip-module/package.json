@@ -1,0 +1,25 @@
+{
+    "name": "tooltip-module",
+    "version": "0.0.1",
+    "description": "Tooltip Module",
+    "main": "gulpfile.js",
+    "directories": {
+        "test": "test"
+    },
+    "keywords": [
+        "tooltip",
+        "module"
+    ],
+    "author": "Christian Lohr",
+    "license": "MIT",
+    "devDependencies": {
+        "gulp": "^3.8.0",
+        "gulp-compass": "^1.1.9",
+        "gulp-rename": "^1.2.0",
+        "gulp-uglify": "^0.3.0",
+        "gulp-mocha-phantomjs": "^0.2.1",
+        "mocha": "^1.19.0",
+        "should": "^3.3.1",
+        "gulp-jsdoc": "^0.1.4"
+    }
+}

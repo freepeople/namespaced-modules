@@ -1,0 +1,13 @@
+.container {
+  width: 960px;
+  margin: 25px auto;
+  line-height: 120%;
+}
+
+a {
+  color: $link-color;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
