@@ -7,6 +7,11 @@
     var _tooltipContent = '.tooltip--content';
     var _activeCssClass = 'is-open';
 
+    /**
+     * Tooltip Class
+     * @constructor
+     * @param {object} element - html element to be used as selector
+     */
     var Tooltip = function($obj) {
         this.$active = $obj;
         this.settings = {
@@ -30,6 +35,12 @@
     };
 
     Tooltip.prototype = {
+        constructor: Tooltip,
+        /**
+         * Builds the tooltip html
+         * @method createTip
+         *
+         */
         createTip: function () {
             var self = this;
             // remove prior tips
@@ -55,6 +66,11 @@
             // prepend to body
             $('body').prepend($tip);
         },
+        /**
+         * Loads the tooltip data
+         * @method loadTipData
+         *
+         */
         loadTipData: function () {
             var self = this;
             // loading methods
@@ -94,6 +110,11 @@
                 throw new Error('Cannot load tooltip data');
             }
         },
+        /**
+         * Positions the tooltip
+         * @method positionTip
+         *
+         */
         positionTip: function () {
             // position tooltip based on direction and offset value
             var self = this;
@@ -141,15 +162,30 @@
                 left: Math.floor(x) + 'px'
             });
         },
+        /**
+         * Display the tooltip
+         * @method openTip
+         *
+         */
         openTip: function () {
             var self = this;
             self.createTip();
             self.loadTipData();
             $(_tooltipDiv).addClass(_activeCssClass);
         },
+        /**
+         * Hides the tooltip
+         * @method closeTip
+         *
+         */
         closeTip: function () {
             closeOutside();
         },
+        /**
+         * Get the JSON settings and merge with the tooltip defaults
+         * @method getSettings
+         *
+         */
         getSettings: function () {
             var self = this;
             var $elem = self.$active;
@@ -159,6 +195,11 @@
                 self.settings = newOpts;
             }
         },
+        /**
+         * Bind tooltip hover and click events
+         * @method bindEvents
+         *
+         */
         bindEvents: function () {
             // bind events
             var self = this;

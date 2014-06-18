@@ -1,24 +1,12 @@
 ### Tooltip Module
 
 #### Usage
-This is data driven based on ```data-tooltip``` and it's options. The FP tooltip module has the following options:
-````
-var _defaults = {
-    event: 'hover',
-    direction: 'top',
-    xOffset: '20px',
-    yOffset: '20px',
-    url: '',
-    selector: 'tooltip-content'
-};
-````
+This is data driven based on ```data-tooltip``` and it's options.
 
-**Examples**
+**Hover Example**
 
-````
+    <a href="#" id="hoverTip" data-toggle="tooltip" title="Mlkshk deep v tattooed four loko fap put a bird on it tofu post-ironic.">Hover Tooltip Example</a>
 
-````
+**Click Example**
 
-````
-
-````
+    <a href="#" id="clickTip" data-toggle="tooltip" data-tooltip-settings='{"event": "click", "autoClose": 0, "direction": "right", "url": "partial.html", "width": 450}'>Click Tooltip Example</a>
