@@ -5,8 +5,6 @@
     var closeModal = "[data-modal='close']";
     var $body = $('body');
 
-    // Modernizr based
-    // works with css transitions
     var transEndEventNames = {
         'transition': 'transitionend',
         'OTransition': 'otransitionend',
@@ -28,15 +26,35 @@
         }
     };
 
+    var getExternalData = function(externalData) {
+        // store the data in a temp cache
+        // so when user clicks on the button 
+        // multiple times it doesnt add to network
+        // requests...
+        if (!!!theModal.config.cache) {
+            $.ajax(externalData).done(function(data) {
+                theModal.config.cache = data;
+                theModal.config.active
+                    .find('.modal--content')
+                    .append(theModal.config.cache);
+            });
+        }
+    };
+
     var theModal = {
         config: {
-            active: ''
+            active: '',
+            cache: ''
         },
         methods: {
             show: function(e) {
                 var $modalButton = $(this);
                 var contentSelector = $modalButton.data('modal').content;
+                var externalData = $modalButton.data('modal').data;
                 var $modal = theModal.config.active = $(contentSelector);
+                if (!!externalData) {
+                    getExternalData(externalData);
+                }
                 $modal.show(); // display block on modal
                 $body.height(); // redraw
                 $modal.addClass('is-open'); // show modal
@@ -60,7 +78,7 @@
     $(document)
         .on('click.open.modal', modalTrigger, theModal.methods.show)
         .on('click.close.modal', closeModal, theModal.methods.close)
-        .on('click.outside', '.is-open', outsideClick)
+        .on('click.outside', outsideClick)
         .on('keydown.modal', escapeModal);
 
 }(jQuery, window, document));
