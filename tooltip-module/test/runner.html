@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mocha Test Runner</title>
+    <link rel="stylesheet" href="../node_modules/mocha/mocha.css">
+</head>
+<body>
+
+    <div id="mocha">
+        <a href="#" id="hoverTip" data-toggle="tooltip" title="Mlkshk deep v tattooed four loko fap put a bird on it tofu post-ironic. Vice bicycle rights skateboard, blog sartorial Kickstarter Austin trust fund hashtag plaid Shoreditch ennui.">Pitchfork</a>
+        <a href="#" id="clickTip" data-toggle="tooltip" data-tooltip-settings='{"event": "click", "direction": "left", "url": "partial.html", "cssClasses": "primary my-account", "width": 450}'>banh mi</a>
+    </div>
+
+    <script src="../node_modules/mocha/mocha.js"></script>
+    <script src="../node_modules/should/should.js"></script>
+    <script>mocha.setup('bdd');</script>
+
+    <!-- begin test scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="../public/app.min.js"></script>
+    <script src="specs/tooltip.js"></script>
+    <!-- end test scripts -->
+
+    <script>
+        if (window.mochaPhantomJS) {
+            mochaPhantomJS.run();
+        } else {
+            mocha.run();
+        }
+    </script>
+
+</body>
+</html>
