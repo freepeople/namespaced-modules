@@ -1,4 +1,5 @@
-(function($, window, document) {
+var FP = window.FP || {};
+FP.Tooltip = (/** @lends <global> */function($, window, document) {
     'use strict';
 
     var _tooltipTrigger = "[data-toggle='tooltip']";
@@ -8,12 +9,13 @@
     var _activeCssClass = 'is-open';
 
     /**
-     * Tooltip Class
-     * @constructor
+     * @constructor Tooltip
      * @param {object} element - html element to be used as selector
      */
     var Tooltip = function($obj) {
+        /** @member {Object} */
         this.$active = $obj;
+        /** @member {Object} */
         this.settings = {
             event: 'hover',
             direction: 'top',
@@ -23,23 +25,32 @@
             width: 400,
             cssClasses: ''
         };
+        /** @member {String} */
         this.cache = '';
+        /** @member {String} */
         this.baseClassName = 'tooltip';
         // initialize
         this.getSettings();
         this.bindEvents();
     };
 
+    /**
+     * Hides tooltip
+     * @private
+     * @function closeOutside
+     */
     var closeOutside = function () {
         $(_tooltipDiv).removeClass(_activeCssClass);
     };
 
     Tooltip.prototype = {
+        /** @constructs */
         constructor: Tooltip,
         /**
          * Builds the tooltip html
+         * @public
          * @method createTip
-         *
+         * @memberof Tooltip
          */
         createTip: function () {
             var self = this;
@@ -68,8 +79,9 @@
         },
         /**
          * Loads the tooltip data
+         * @public
          * @method loadTipData
-         *
+         * @memberof Tooltip
          */
         loadTipData: function () {
             var self = this;
@@ -112,8 +124,9 @@
         },
         /**
          * Positions the tooltip
+         * @public
          * @method positionTip
-         *
+         * @memberof Tooltip
          */
         positionTip: function () {
             // position tooltip based on direction and offset value
@@ -164,8 +177,9 @@
         },
         /**
          * Display the tooltip
+         * @public
          * @method openTip
-         *
+         * @memberof Tooltip
          */
         openTip: function () {
             var self = this;
@@ -175,16 +189,18 @@
         },
         /**
          * Hides the tooltip
+         * @public
          * @method closeTip
-         *
+         * @memberof Tooltip
          */
         closeTip: function () {
             closeOutside();
         },
         /**
          * Get the JSON settings and merge with the tooltip defaults
+         * @public
          * @method getSettings
-         *
+         * @memberof Tooltip
          */
         getSettings: function () {
             var self = this;
@@ -197,8 +213,9 @@
         },
         /**
          * Bind tooltip hover and click events
+         * @public
          * @method bindEvents
-         *
+         * @memberof Tooltip
          */
         bindEvents: function () {
             // bind events
@@ -219,10 +236,6 @@
 
     // event delegation
     $(document).on('click.close.tooltip', _tooltipClose, closeOutside);
-
-    // namespace module
-    window.FP = window.FP || {};
-    window.FP.Tooltip = Tooltip;
 
     // create tooltip for each element
     return $(_tooltipTrigger).each(function () {
