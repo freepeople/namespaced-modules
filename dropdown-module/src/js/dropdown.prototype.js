@@ -3,56 +3,43 @@
 
     var _dropDownSelector = '[data-toggle="dropdown"]';
 
-    var Dropdown = function($element, config) {
-        this.element = $element;
-
+    var Dropdown = function(element, config) {
+        this.element = element;
+        this.parent = element.parent();
         this.bindEvents();
     };
 
     Dropdown.prototype = {
         constructor: Dropdown,
         toggleMenu: function(e) {
-            var $this = $(e.target);
-            var $parent = $this.parent();
+            e.preventDefault();
+            e.stopPropagation();
+            var $parent = this.parent;
             var isOpened = $parent.hasClass('is-opened');
-
-            this.dropDownRestore(e);
             if (!isOpened) {
-                $this.trigger('focus');
                 $parent.addClass('is-opened');
-                $this.trigger('dropdown.visible');
+                return;
             }
-
-            // prevent default browser action
-            // and stop further event bubbling
-            return false;
+            $parent.removeClass('is-opened');
         },
         itemSelected: function(e) {
-           e.preventDefault();
-           var $this = $(e.target);
-           var getItemText = $this.text();
-           var $toggle = $this.closest('.dropdown-container').siblings(_dropDownSelector);
-           $this.parent().children().removeClass('is-active');
-           $this.addClass('is-active');
-           $toggle.text(getItemText);
+            e.preventDefault();
+            var $item = $(e.target);
+            var getText = $item.text();
+            this.element.text(getText);
+            this.parent.removeClass('is-opened');
         },
         keydown: function(e) {
             // if not up or down arrows or escape
             // then exit out 
-            if (!/(38|40|27)/.test(e.keyCode)){ return; }
-
-            var $this = $(this);
-            var $parent = $this.parent();
-            var isOpened = $parent.hasClass('is-opened');
-
-            // if the escape button is pressed and and dropdown
-            // is opend close it similar to a click outside
-            // the dropdown...
-            if (!isOpened || (isOpened && e.keyCode === 27)) {
-                return $this.trigger('click');
+            if (!/(38|40|27)/.test(e.keyCode)) {
+                return;
             }
-
-            var $items = $parent.find('[role="menu"] li a');
+            var isOpened = this.parent.hasClass('is-opened');
+            if (!isOpened || (isOpened && e.keyCode === 27)) {
+                return this.closeMenu();
+            }
+            var $items = this.parent.find('[role="menu"] li a');
             if (!$items.length){ return;}
 
             var index = $items.index($items.filter(':focus'));
@@ -71,39 +58,26 @@
 
             $items.eq(index).trigger('focus');
         },
-        dropDownRestore: function(e) {
-            if (e && e.which === 3){ return; }
-
-            $(_dropDownSelector).each(function() {
-                var $this = $(this);
-                var $parent = $this.parent();
-                if (!$parent.hasClass('is-opened')){ return;}
-                $parent.removeClass('is-opened');
-                $this.trigger('dropdown.hidden');
-            });
-
+        closeMenu: function() {
+            if (!this.parent.hasClass('is-opened')) {
+                return;
+            }
+            this.parent.removeClass('is-opened');
         },
         bindEvents: function() {
-            var i;
             var $doc = $(document);
-            var eventsMap = {
-                'click.restore.dropdown': this.dropDownRestore,
-                'click.toggle.dropdown': [_dropDownSelector, $.proxy(this.toggleMenu, this)],
-                'click.dropdown.selected': ['[role="menu"] li', $.proxy(this.itemSelected, this)],
-                'keydown.menu.dropdown': [_dropDownSelector + ', [role="menu"]', this.keydown]
-            };
-            for (i in eventsMap) {
-                if (eventsMap.hasOwnProperty(i)) {
-                    if ($.isArray(eventsMap[i])) {
-                        $doc.on(i, eventsMap[i][0], eventsMap[i][1]);
-                    } else {
-                        $doc.on(i, eventsMap[i]);
-                    }
-                }
-            }
+            this.element
+                .on('click.toggleMenu.dropdown', $.proxy(this.toggleMenu, this))
+                .closest('.dropdown')
+                .on('click.item.dropdown', 'li', $.proxy(this.itemSelected, this));
+            $doc
+                .on('click.closeMenu.dropdown', $.proxy(this.closeMenu, this))
+                .on('keydown.dropdown', $.proxy(this.keydown, this));
         }
     };
 
-    return new Dropdown($(_dropDownSelector));
+    $(_dropDownSelector).each(function() {
+        return new Dropdown($(this));
+    });
 
 })(jQuery, window, document);
