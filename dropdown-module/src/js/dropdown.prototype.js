@@ -71,7 +71,7 @@
                 .closest('.dropdown')
                 .on('click.item.dropdown', 'li', $.proxy(this.itemSelected, this));
             $doc
-                .on('click.closeMenu.dropdown', $.proxy(this.closeMenu, this))
+                .on('click.outside.dropdown', $.proxy(this.closeMenu, this))
                 .on('keydown.dropdown', $.proxy(this.keydown, this));
         }
     };
