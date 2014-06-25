@@ -1,62 +1,62 @@
-.float-right {
-    float:right;
-}
+// Name: Dropdown
 
-.float-left {
-    float:left;
-}
-
-.group:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-// @mixins
-@mixin arrow($width: 20px, $height: 20px, $direction: up, $color: #bf0000) {
-    width: 0;
-    height: 0;
-    @if $direction == right {
-        border-top: $height / 2 solid transparent;
-        border-bottom: $height / 2 solid transparent;
-        border-left: $width solid $color;
+.dropdown {
+    position: relative;
+    background: url("http://www.freepeople.com/resources/_shared/images/backgrounds/border-75.png");
+    padding: 1px 1px 1px 1px;
+    margin: 0 8px;
+    &.is-opened {
+        padding: 1px 1px 0px 1px;
     }
-    @if $direction == left {
-        border-top: $height / 2 solid transparent;
-        border-bottom: $height / 2 solid transparent;
-        border-right: $width solid $color;
+    a {
+        text-decoration: none;
+        font-size: .9em;
     }
-    @if $direction == up {
-        border-left: $width / 2 solid transparent;
-        border-right: $width / 2 solid transparent;
-        border-bottom: $height solid $color;
-    }
-    @if $direction == down {
-        border-left: $width / 2 solid transparent;
-        border-right: $width / 2 solid transparent;
-        border-top: $height solid $color;
+    a:focus {
+        outline: none;
     }
 }
 
-.caret {
-    display: inline-block;
-    margin-left: 2px;
-    @include arrow(10px, 8px, down, $dark-grey);
+.dropdown-trigger {
+    background: $white;
+    display: block;
+    padding: 8px;
+    position: relative;
+    z-index: 30;
+    &:after {
+        content: '';
+        display: inline-block;
+        background-image: url(http://www.freepeople.com/resources/_shared/images/spritesheets/_icons_2x.png);
+        background-size: 400px 1000px;
+        background-position: -156px -476px;
+        width: 15px;
+        height: 11px;
+    }
+}
+
+.dropdown-container {
+    background: url("http://www.freepeople.com/resources/_shared/images/backgrounds/border-75.png");
+    position: absolute;
+    padding: 1px;
+    top: 33px;
+    z-index: 10;
+    left: 0;
 }
 
 .dropdown-menu {
-    position: absolute;
-    top: $max;
-    left: 0;
+    /* Positioning */
+    position: relative;
     z-index: 1000;
+    /* Display and Box-model */
     display: none;
     min-width: $dropdown-min-width;
-    padding: 5px 0;
-    margin: 7px 0 0;
-    border: 1px solid $grey;
-    border-radius: 4px;
+    padding: 16px 0 0;
+    margin: 0;
+    max-height: 151px;
+    overflow-y: scroll;
+    /* Color */
     background: $white;
-    font-size: $default-font-size;
+    /* Text */
     text-align: left;
     list-style: none;
     .divider {
@@ -65,16 +65,14 @@
         margin: 9px 0;
         background: $light-grey;
     }
-    > li > a {
-        clear: both;
-        display: block;
-        padding: 3px 20px;
-        color: $dark-grey;
-        line-height: 1.4;
-    }
 }
 
 .dropdown-menu > li > a {
+    clear: both;
+    display: block;
+    padding: 3px 20px;
+    color: $dark-grey;
+    line-height: 1.4;
     &:hover,
     &:focus {
         color: #262626;
@@ -83,13 +81,10 @@
     }
 }
 
-.dropdown {
-    position: relative;
-    margin: 0 8px;
-    a {
-        text-decoration: none;
-        &:focus {
-            outline: none;
-        }
-    }
+.is-opened  .dropdown-menu {
+    display: block;
+}
+
+.floatLeft {
+    float: left;
 }
